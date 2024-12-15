@@ -3,7 +3,6 @@
     - Skapa html/css som du sedan kan använda i ditt projekt
     - Börja fundera på vilket innehåll du vill använda
 
-## Skapa ett nytt git-repo för dina statiska filer: "namn_cms_projektarbete" och dela på github med ian.hellgren@iths.se
 I detta repo skapar du en mappen "statisk" med följande filer (minst):
         - startsida.html
             - rubrik
