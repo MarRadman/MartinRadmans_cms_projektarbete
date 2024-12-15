@@ -39,3 +39,6 @@ I detta repo skapar du en mappen "statisk" med följande filer (minst):
             - WCAG-ansträngningar
             - SEO-åtgärder
             - Om du av någon anledning inte vill ange riktig information på webbplatsen så går det bra att använda fiktiv data. (Dock ej “lorem-ipsum”).
+
+
+figma: https://www.figma.com/design/b4cDIjg2Af9SbYa8oLT4g7/CMS-Projekt?node-id=1-2&p=f&t=SfPlqqvl9HWWiwmA-0
