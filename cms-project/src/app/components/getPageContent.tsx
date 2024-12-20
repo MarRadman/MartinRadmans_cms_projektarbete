@@ -1,6 +1,24 @@
 import { fetchData } from "../lib/contentful";
 
-export const getPageContent = async (pageId: string) => {
+export interface ProjectData {
+  title: string;
+  content: string;
+  images: string[];
+}
+
+export interface PageData {
+  title: string;
+  content: string;
+  images: string[];
+  address?: string;
+  email?: string;
+  phone?: string;
+  projects?: ProjectData[];
+}
+
+export const getPageContent = async (
+  pageId: string
+): Promise<PageData | null> => {
   const pageData = await fetchData(pageId);
   const page = pageData[0]?.fields;
 
@@ -8,45 +26,66 @@ export const getPageContent = async (pageId: string) => {
     return null;
   }
 
-  const extractContent = (content: any): { text: string; images: string[] } => {
-    let text = "";
-    let images: string[] = [];
-
-    content.forEach((item: any) => {
-      if (item.nodeType === "text") {
-        text += item.value;
-      } else if (
-        item.nodeType === "embedded-asset-block" &&
-        item.data?.target?.fields?.file?.url
-      ) {
-        images.push(item.data.target.fields.file.url);
-      } else if (item.content) {
-        const extracted = extractContent(item.content);
-        text += extracted.text;
-        images = images.concat(extracted.images);
-      }
-    });
-
-    return { text, images };
+  const makeAbsoluteUrl = (url: string): string => {
+    if (url.startsWith("//")) {
+      return `https:${url}`;
+    }
+    return url;
   };
 
-  let pageContent = { text: "", images: [] as string[] };
-  if (
-    page.content &&
-    typeof page.content === "object" &&
-    "content" in page.content
-  ) {
-    pageContent = extractContent(page.content.content || []);
-  }
+  const extractText = (content: any[]): string => {
+    return content
+      .map((item) => {
+        if (item.nodeType === "text") {
+          return item.value;
+        } else if (item.content) {
+          return extractText(item.content);
+        }
+        return "";
+      })
+      .join(" ");
+  };
+
+  const extractImages = (content: any[]): string[] => {
+    return content
+      .filter(
+        (item) =>
+          item.nodeType === "embedded-asset-block" &&
+          item.data?.target?.fields?.file?.url
+      )
+      .map((item) => makeAbsoluteUrl(item.data.target.fields.file.url));
+  };
+
+  const extractProjects = (projects: any[]): ProjectData[] => {
+    return projects.map((project) => {
+      const projectFields = project.fields;
+      const projectContent = extractText(projectFields.content?.content || []);
+      const projectImages = extractImages(projectFields.content?.content || []);
+
+      return {
+        title: projectFields.title || "Untitled",
+        content: projectContent,
+        images: projectImages,
+      };
+    });
+  };
+
+  const textContent = extractText(page.content?.content || []);
+  const images = extractImages(page.content?.content || []);
+  const projects = page.projects ? extractProjects(page.projects) : [];
 
   // Extract images from the 'image' field if it exists
   if (page.image?.fields?.file?.url) {
-    pageContent.images.push(page.image.fields.file.url);
+    images.push(makeAbsoluteUrl(page.image.fields.file.url));
   }
 
   return {
     title: page.title || "Untitled",
-    content: pageContent.text,
-    images: pageContent.images,
+    content: textContent,
+    images,
+    address: page.address || "",
+    email: page.email || "",
+    phone: page.phone || "",
+    projects,
   };
 };
