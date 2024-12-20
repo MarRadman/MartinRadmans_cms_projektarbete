@@ -4,6 +4,7 @@ export interface ProjectData {
   title: string;
   content: string;
   images: string[];
+  slug: string;
 }
 
 export interface PageData {
@@ -61,11 +62,20 @@ export const getPageContent = async (
       const projectFields = project.fields;
       const projectContent = extractText(projectFields.content?.content || []);
       const projectImages = extractImages(projectFields.content?.content || []);
+      const projectSlug = project.fields.slug;
+
+      // Extract images from the 'image' field if it exists
+      if (projectFields.image?.fields?.file?.url) {
+        projectImages.push(
+          makeAbsoluteUrl(projectFields.image.fields.file.url)
+        );
+      }
 
       return {
         title: projectFields.title || "Untitled",
         content: projectContent,
         images: projectImages,
+        slug: projectSlug,
       };
     });
   };

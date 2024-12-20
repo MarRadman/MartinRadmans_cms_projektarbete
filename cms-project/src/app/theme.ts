@@ -9,6 +9,14 @@ const theme = createTheme({
       main: "#dc004e", // Your secondary color
     },
   },
+  typography: {
+    h1: {
+      fontSize: 40,
+    },
+    h2: {
+      fontSize: 20,
+    },
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
