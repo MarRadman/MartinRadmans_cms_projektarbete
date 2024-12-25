@@ -44,7 +44,7 @@ export default function Header() {
               <Link href="/">Homepage</Link>
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
-              <Link href="/project">Projects</Link>
+              <Link href="/projects">Projects</Link>
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
               <Link href="/about">About</Link>
