@@ -18,9 +18,10 @@ export interface PageData {
 }
 
 export const getPageContent = async (
-  pageId: string
+  contentType: string,
+  slug?: string
 ): Promise<PageData | null> => {
-  const pageData = await fetchData(pageId);
+  const pageData = await fetchData(contentType, slug);
   const page = pageData[0]?.fields;
 
   if (!page) {

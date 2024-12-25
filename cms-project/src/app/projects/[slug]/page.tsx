@@ -1,16 +1,19 @@
 import { getPageContent, PageData } from "../../components/getPageContent";
 import { Box, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 
-const ProjectPage = async () => {
-  const { slug } = router.query;
-
-  const projectData: PageData | null = await getPageContent(slug as string);
+const ProjectPage = async ({ params }: { params: { slug: string } }) => {
+  const projectData: PageData | null = await getPageContent(
+    "project",
+    params.slug
+  );
 
   if (!projectData) {
     return <Typography variant="h1">Project content not found</Typography>;
   }
 
-  console.log(projectData.slug);
+  console.log("Got into project page. Project data:", projectData);
 
   return (
     <Box>
@@ -31,6 +34,7 @@ const ProjectPage = async () => {
             width={500}
             height={300}
           />
+          <Link href="/projects">Back to projects</Link>
         </Box>
       ))}
     </Box>

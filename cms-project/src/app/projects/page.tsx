@@ -20,7 +20,7 @@ const Projects = async () => {
           <Box key={index} mb={4}>
             <Typography variant="h2">{project.title}</Typography>
             <Typography variant="body1">{project.content}</Typography>
-            <Link href={`/projects/${project.slug}/page`}>Read more</Link>
+
             {project.images.map((image, imgIndex) => (
               <Box
                 key={imgIndex}
@@ -36,6 +36,7 @@ const Projects = async () => {
                   width={500}
                   height={300}
                 />
+                <Link href={`/projects/${project.slug}`}>Read more</Link>
               </Box>
             ))}
           </Box>

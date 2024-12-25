@@ -5,7 +5,16 @@ export const client = createClient({
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || "",
 });
 
-export const fetchData = async (contentType: string) => {
-  const Data = await client.getEntries({ content_type: contentType });
-  return Data.items;
+export const fetchData = async (contentType: string, slug?: string) => {
+  try {
+    const query: any = { content_type: contentType };
+    if (slug) {
+      query["fields.slug"] = slug;
+    }
+    const data = await client.getEntries(query);
+    return data.items;
+  } catch (error) {
+    console.error("Error fetching data from Contentful:", error);
+    throw new Error("Failed to fetch data from Contentful");
+  }
 };
