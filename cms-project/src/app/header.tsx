@@ -16,8 +16,6 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  // Hook to check if the user on smaller screens.
-  // Remove the searchbar if user screen is smaller than the sm breakpoint
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -28,8 +26,8 @@ export default function Header() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box className="navmenu" sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ backgroundColor: "inherit" }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <h1>Headless CMS Project</h1>
@@ -56,11 +54,12 @@ export default function Header() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 5 }}
             onClick={handleMenuOpen}>
             <MenuIcon />
           </IconButton>
           <Menu
+            className="navmenu-dropdownmenu"
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}>
