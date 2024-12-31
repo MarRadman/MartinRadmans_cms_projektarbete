@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,9 +10,10 @@ import Link from "next/link";
 import InputBase from "@mui/material/InputBase";
 import { Paper, useMediaQuery, useTheme } from "@mui/material";
 import Divider from "@mui/material/Divider";
+import { useState } from "react";
 
 export default function Header() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   // Hook to check if the user on smaller screens.

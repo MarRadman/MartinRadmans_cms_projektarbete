@@ -25,6 +25,14 @@ const theme = createTheme({
           height: "auto", // Maintain aspect ratio
           maxWidth: "500px", // Optional: Set a maximum width
         },
+        ".center-content": {
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
+          width: "100%",
+        },
       },
     },
   },

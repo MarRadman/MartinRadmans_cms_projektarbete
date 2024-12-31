@@ -1,21 +1,5 @@
 import { fetchData } from "../lib/contentful";
-
-export interface ProjectData {
-  title: string;
-  content: string;
-  images: string[];
-  slug: string;
-}
-
-export interface PageData {
-  title: string;
-  content: string;
-  images: string[];
-  address?: string;
-  email?: string;
-  phone?: string;
-  projects?: ProjectData[];
-}
+import { PageData, ProjectData } from "@/app/types";
 
 export const getPageContent = async (
   contentType: string,
@@ -91,12 +75,15 @@ export const getPageContent = async (
   }
 
   return {
-    title: page.title || "Untitled",
+    title: String(page.title) || "Untitled",
     content: textContent,
     images,
-    address: page.address || "",
-    email: page.email || "",
-    phone: page.phone || "",
+    address: String(page.address) || "",
+    email: String(page.email) || "",
+    phone: String(page.phone) || "",
+    github: String(page.github) || "",
+    linkedin: String(page.linkedin) || "",
+    image: Array(page.image?.fields?.file?.url) || "",
     projects,
   };
 };

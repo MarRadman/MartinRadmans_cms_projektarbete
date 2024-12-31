@@ -1,4 +1,5 @@
-import { getPageContent, PageData } from "../../components/getPageContent";
+import { getPageContent } from "../../components/getPageContent";
+import { PageData } from "@/app/types";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,8 +13,6 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
   if (!projectData) {
     return <Typography variant="h1">Project content not found</Typography>;
   }
-
-  console.log("Got into project page. Project data:", projectData);
 
   return (
     <Box>
