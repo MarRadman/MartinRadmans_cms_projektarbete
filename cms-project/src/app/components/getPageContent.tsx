@@ -32,29 +32,18 @@ export const getPageContent = async (
       .join(" ");
   };
 
-  const extractImages = (content: any[]): string[] => {
-    return content
-      .filter(
-        (item) =>
-          item.nodeType === "embedded-asset-block" &&
-          item.data?.target?.fields?.file?.url
-      )
-      .map((item) => makeAbsoluteUrl(item.data.target.fields.file.url));
+  const extractImages = (imagesField: any[]): string[] => {
+    return imagesField.map((image: any) =>
+      makeAbsoluteUrl(image.fields.file.url)
+    );
   };
 
   const extractProjects = (projects: any[]): ProjectData[] => {
     return projects.map((project) => {
       const projectFields = project.fields;
       const projectContent = extractText(projectFields.content?.content || []);
-      const projectImages = extractImages(projectFields.content?.content || []);
+      const projectImages = extractImages(projectFields.images || []);
       const projectSlug = project.fields.slug;
-
-      // Extract images from the 'image' field if it exists
-      if (projectFields.image?.fields?.file?.url) {
-        projectImages.push(
-          makeAbsoluteUrl(projectFields.image.fields.file.url)
-        );
-      }
 
       return {
         title: projectFields.title || "Untitled",
@@ -66,24 +55,24 @@ export const getPageContent = async (
   };
 
   const textContent = extractText(page.content?.content || []);
-  const images = extractImages(page.content?.content || []);
+  const images = extractImages(page.images || []);
   const projects = page.projects ? extractProjects(page.projects) : [];
 
-  // Extract images from the 'image' field if it exists
-  if (page.image?.fields?.file?.url) {
-    images.push(makeAbsoluteUrl(page.image.fields.file.url));
-  }
+  // Extract single image from the 'image' field if it exists
+  const image = page.image?.fields?.file?.url
+    ? makeAbsoluteUrl(page.image.fields.file.url)
+    : "";
 
   return {
     title: String(page.title) || "Untitled",
     content: textContent,
     images,
+    image,
     address: String(page.address) || "",
     email: String(page.email) || "",
     phone: String(page.phone) || "",
     github: String(page.github) || "",
     linkedin: String(page.linkedin) || "",
-    image: Array(page.image?.fields?.file?.url) || "",
     projects,
   };
 };

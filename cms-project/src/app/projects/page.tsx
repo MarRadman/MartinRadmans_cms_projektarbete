@@ -28,9 +28,6 @@ const Projects = async () => {
         alignItems: "center",
         p: 3,
       }}>
-      <Typography variant="h1" gutterBottom>
-        {pageData.title}
-      </Typography>
       {pageData.projects && (
         <ImageList sx={{ width: "100%", maxWidth: 1200 }} cols={3} gap={16}>
           {pageData.projects.map((project, index) => (
@@ -40,14 +37,11 @@ const Projects = async () => {
                   component="img"
                   alt={project.title}
                   height="140"
-                  image={project.images[0]} // Assuming the first image is the main image
+                  image={project.images[0]}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {project.title}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                    {project.content}
                   </Typography>
                 </CardContent>
                 <CardActions>

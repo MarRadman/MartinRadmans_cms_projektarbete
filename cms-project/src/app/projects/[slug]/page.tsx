@@ -26,6 +26,7 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
             width: "100%",
             maxWidth: "500px",
             height: "auto",
+            mb: 2,
           }}>
           <Image
             src={image}
@@ -33,9 +34,9 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
             width={500}
             height={300}
           />
-          <Link href="/projects">Back to projects</Link>
         </Box>
       ))}
+      <Link href="/projects">Back to projects</Link>
     </Box>
   );
 };
