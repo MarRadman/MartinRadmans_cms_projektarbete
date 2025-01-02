@@ -1,7 +1,17 @@
 import { getPageContent } from "../components/getPageContent";
 import { PageData } from "@/app/types";
 import Link from "next/link";
-import { Box, Typography, ImageList, ImageListItem } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  ImageList,
+  ImageListItem,
+} from "@mui/material";
 
 const Projects = async () => {
   const pageData: PageData | null = await getPageContent("projects");
@@ -11,23 +21,48 @@ const Projects = async () => {
   }
 
   return (
-    <Box>
-      <Typography variant="h1">{pageData.title}</Typography>
-      {pageData.projects &&
-        pageData.projects.map((project, index) => (
-          <Box key={index} mb={4}>
-            <Typography variant="h2">{project.title}</Typography>
-            <Typography variant="body1">{project.content}</Typography>
-            <ImageList rowHeight={160} cols={3} gap={8}>
-              {project.images.map((image, imgIndex) => (
-                <ImageListItem key={imgIndex} cols={1}>
-                  <img src={image} alt={`Image ${imgIndex + 1}`} />
-                </ImageListItem>
-              ))}
-            </ImageList>
-            <Link href={`/projects/${project.slug}`}>Read more</Link>
-          </Box>
-        ))}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        p: 3,
+      }}>
+      <Typography variant="h1" gutterBottom>
+        {pageData.title}
+      </Typography>
+      {pageData.projects && (
+        <ImageList sx={{ width: "100%", maxWidth: 1200 }} cols={3} gap={16}>
+          {pageData.projects.map((project, index) => (
+            <ImageListItem key={index}>
+              <Card sx={{ maxWidth: 345 }}>
+                <CardMedia
+                  component="img"
+                  alt={project.title}
+                  height="140"
+                  image={project.images[0]} // Assuming the first image is the main image
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {project.title}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                    {project.content}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    component={Link}
+                    href={`/projects/${project.slug}`}>
+                    Learn More
+                  </Button>
+                </CardActions>
+              </Card>
+            </ImageListItem>
+          ))}
+        </ImageList>
+      )}
     </Box>
   );
 };
