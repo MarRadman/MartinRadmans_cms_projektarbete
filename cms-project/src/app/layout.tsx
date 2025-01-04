@@ -5,7 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
 import Header from "./header";
 import Footer from "./footer";
-import { Box } from "@mui/material";
 
 export default function RootLayout({
   children,
@@ -18,7 +17,7 @@ export default function RootLayout({
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Header />
-          <Box className="center-content">{children}</Box>
+          {children}
           <Footer />
         </ThemeProvider>
       </body>

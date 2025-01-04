@@ -20,6 +20,9 @@ export const getPageContent = async (
   };
 
   const extractText = (content: any[]): string => {
+    if (!Array.isArray(content)) {
+      return ""; // Return an empty string if content is not an array
+    }
     return content
       .map((item) => {
         if (item.nodeType === "text") {
@@ -33,21 +36,29 @@ export const getPageContent = async (
   };
 
   const extractImages = (imagesField: any[]): string[] => {
+    if (!Array.isArray(imagesField)) {
+      return []; // Return an empty array if imagesField is not an array
+    }
     return imagesField.map((image: any) =>
       makeAbsoluteUrl(image.fields.file.url)
     );
   };
 
   const extractProjects = (projects: any[]): ProjectData[] => {
+    if (!Array.isArray(projects)) {
+      return []; // Return an empty array if projects is not an array
+    }
     return projects.map((project) => {
       const projectFields = project.fields;
       const projectContent = extractText(projectFields.content?.content || []);
+      const projectDescription = projectFields.description || "";
       const projectImages = extractImages(projectFields.images || []);
       const projectSlug = project.fields.slug;
 
       return {
         title: projectFields.title || "Untitled",
         content: projectContent,
+        description: projectDescription,
         images: projectImages,
         slug: projectSlug,
       };
@@ -55,6 +66,7 @@ export const getPageContent = async (
   };
 
   const textContent = extractText(page.content?.content || []);
+  const textDescription = extractText(page.description?.de || []);
   const images = extractImages(page.images || []);
   const projects = page.projects ? extractProjects(page.projects) : [];
 
@@ -66,6 +78,7 @@ export const getPageContent = async (
   return {
     title: String(page.title) || "Untitled",
     content: textContent,
+    description: textDescription,
     images,
     image,
     address: String(page.address) || "",

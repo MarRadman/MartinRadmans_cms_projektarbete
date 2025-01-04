@@ -1,6 +1,7 @@
 export interface ProjectData {
   title: string;
   content: string;
+  description: string;
   images: string[];
   slug: string;
 }
@@ -8,6 +9,7 @@ export interface ProjectData {
 export interface PageData {
   title: string;
   content: string;
+  description: string;
   image: string[];
   images: string[];
   address?: string;

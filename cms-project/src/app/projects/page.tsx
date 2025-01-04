@@ -36,12 +36,15 @@ const Projects = async () => {
                 <CardMedia
                   component="img"
                   alt={project.title}
-                  height="200" // Adjust the height as needed
+                  height="200"
                   image={project.images[0]}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {project.title}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {project.description}
                   </Typography>
                 </CardContent>
                 <CardActions>
