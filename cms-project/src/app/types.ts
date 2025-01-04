@@ -4,6 +4,8 @@ export interface ProjectData {
   description: string;
   images: string[];
   slug: string;
+  technologies?: string[];
+  url?: string;
 }
 
 export interface PageData {

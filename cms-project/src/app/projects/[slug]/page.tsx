@@ -1,6 +1,14 @@
 import { getPageContent } from "../../components/getPageContent";
 import { PageData } from "@/app/types";
-import { Box, Typography, Card, CardMedia, Button, Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Card,
+  CardMedia,
+  Button,
+  Grid,
+  Chip,
+} from "@mui/material";
 import Link from "next/link";
 
 const ProjectPage = async ({ params }: { params: { slug: string } }) => {
@@ -10,6 +18,8 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
   if (!projectData) {
     return <Typography variant="h1">Project content not found</Typography>;
   }
+
+  console.log("ProjectData: ", projectData);
 
   return (
     <Box
@@ -40,6 +50,25 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
             sx={{ maxWidth: 800, textAlign: "center" }}>
             {projectData.content}
           </Typography>
+          {projectData.technologies && (
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="h6">Technologies:</Typography>
+              {projectData.technologies.map((tech, index) => (
+                <Chip key={index} label={tech} sx={{ m: 0.5 }} />
+              ))}
+            </Box>
+          )}
+          {projectData.url && (
+            <Box sx={{ mt: 2 }}>
+              <Button
+                variant="contained"
+                color="secondary"
+                href={projectData.url !== "#" ? projectData.url : undefined}
+                target={projectData.url !== "#" ? "_blank" : undefined}>
+                Visit Project
+              </Button>
+            </Box>
+          )}
         </Grid>
       </Grid>
       <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>

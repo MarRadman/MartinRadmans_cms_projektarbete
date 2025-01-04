@@ -35,6 +35,22 @@ export const getPageContent = async (
       .join(" ");
   };
 
+  const extractTechnologies = (content: any[]): string[] => {
+    if (!Array.isArray(content)) {
+      return []; // Return an empty array if content is not an array
+    }
+    return content
+      .flatMap((item) => {
+        if (item.nodeType === "text") {
+          return [item.value];
+        } else if (item.content) {
+          return extractTechnologies(item.content);
+        }
+        return [];
+      })
+      .filter((tech) => tech.trim() !== ""); // Filter out empty strings
+  };
+
   const extractImages = (imagesField: any[]): string[] => {
     if (!Array.isArray(imagesField)) {
       return []; // Return an empty array if imagesField is not an array
@@ -54,6 +70,10 @@ export const getPageContent = async (
       const projectDescription = projectFields.description || "";
       const projectImages = extractImages(projectFields.images || []);
       const projectSlug = project.fields.slug;
+      const projectTechnologies = extractTechnologies(
+        projectFields.technologies?.content || []
+      );
+      const projectUrl = projectFields.url || "";
 
       return {
         title: projectFields.title || "Untitled",
@@ -61,13 +81,17 @@ export const getPageContent = async (
         description: projectDescription,
         images: projectImages,
         slug: projectSlug,
+        technologies: projectTechnologies,
+        url: projectUrl,
       };
     });
   };
 
   const textContent = extractText(page.content?.content || []);
   const textDescription = extractText(page.description?.de || []);
+  const technologies = extractTechnologies(page.technologies?.content || []);
   const images = extractImages(page.images || []);
+  const url = page.url || "";
   const projects = page.projects ? extractProjects(page.projects) : [];
 
   // Extract single image from the 'image' field if it exists
@@ -79,6 +103,8 @@ export const getPageContent = async (
     title: String(page.title) || "Untitled",
     content: textContent,
     description: textDescription,
+    technologies,
+    url,
     images,
     image,
     address: String(page.address) || "",
