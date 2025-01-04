@@ -9,9 +9,9 @@ import {
   CardContent,
   CardMedia,
   Button,
-  ImageList,
   ImageListItem,
 } from "@mui/material";
+import styles from "./style.module.css"; // Import the CSS module
 
 const Projects = async () => {
   const pageData: PageData | null = await getPageContent("projects");
@@ -29,14 +29,14 @@ const Projects = async () => {
         p: 3,
       }}>
       {pageData.projects && (
-        <ImageList sx={{ width: "100%", maxWidth: 1200 }} cols={3} gap={16}>
+        <div className={styles.imageList}>
           {pageData.projects.map((project, index) => (
-            <ImageListItem key={index}>
-              <Card sx={{ maxWidth: 345 }}>
+            <ImageListItem key={index} className={styles.imageItem}>
+              <Card className="ImageListCard" sx={{ maxWidth: 345 }}>
                 <CardMedia
                   component="img"
                   alt={project.title}
-                  height="140"
+                  height="200" // Adjust the height as needed
                   image={project.images[0]}
                 />
                 <CardContent>
@@ -55,7 +55,7 @@ const Projects = async () => {
               </Card>
             </ImageListItem>
           ))}
-        </ImageList>
+        </div>
       )}
     </Box>
   );

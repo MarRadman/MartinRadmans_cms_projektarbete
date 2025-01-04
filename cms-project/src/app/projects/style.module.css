@@ -1,0 +1,41 @@
+.imageList {
+  display: grid;
+  width: 100%;
+  max-width: 1200px;
+  gap: 16px;
+}
+
+.imageItem {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Add transition for smooth hover effect */
+}
+
+.imageItem:hover {
+  transform: scale(1.05); /* Slightly scale the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow */
+}
+
+.imageItem img {
+  height: 300px; /* Set a fixed height */
+  width: 100%;
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+@media (max-width: 480px) {
+  .imageList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .imageList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 769px) {
+  .imageList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
