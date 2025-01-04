@@ -26,18 +26,19 @@ const Projects = async () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        p: 3,
+        p: 5,
       }}>
       {pageData.projects && (
         <div className={styles.imageList}>
           {pageData.projects.map((project, index) => (
             <ImageListItem key={index} className={styles.imageItem}>
-              <Card className="ImageListCard" sx={{ maxWidth: 345 }}>
+              <Card className="ImageListCard" sx={{ maxWidth: 400 }}>
                 <CardMedia
                   component="img"
                   alt={project.title}
                   height="200"
                   image={project.images[0]}
+                  className={styles.imageItem}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
