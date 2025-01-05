@@ -12,7 +12,7 @@ import { Paper, useMediaQuery, useTheme } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
 
-export default function Header() {
+const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -80,4 +80,6 @@ export default function Header() {
       </AppBar>
     </Box>
   );
-}
+};
+
+export default Header;

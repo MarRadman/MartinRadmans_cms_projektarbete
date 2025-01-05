@@ -38,7 +38,6 @@ const Projects = async () => {
                   alt={project.title}
                   height="200"
                   image={project.images[0]}
-                  className={styles.imageItem}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">

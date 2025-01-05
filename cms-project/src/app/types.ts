@@ -14,6 +14,8 @@ export interface PageData {
   description: string;
   image: string[];
   images: string[];
+  url: string;
+  technologies: string[];
   address?: string;
   email?: string;
   phone?: string;

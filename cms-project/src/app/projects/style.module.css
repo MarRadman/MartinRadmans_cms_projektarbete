@@ -8,18 +8,18 @@
 .imageItem {
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease; /* Add transition for smooth hover effect */
+    box-shadow 0.3s ease;
 }
 
 .imageItem:hover {
-  transform: scale(1.05); /* Slightly scale the card */
-  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2); /* Add a shadow */
+  transform: scale(1.05);
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
 }
 
 .imageItem img {
-  height: 200px; /* Set a fixed height */
+  height: 200px;
   width: 100%;
-  object-fit: contain; /* Ensure the image fits inside without distortion */
+  object-fit: contain;
 }
 
 @media (max-width: 480px) {

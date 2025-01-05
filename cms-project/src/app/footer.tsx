@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 
-export default function Footer() {
+const Footer = () => {
   const [year, setYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
@@ -21,4 +21,6 @@ export default function Footer() {
       <Box className="footer-links" sx={{ mt: 3 }}></Box>
     </Box>
   );
-}
+};
+
+export default Footer;
