@@ -10,12 +10,24 @@ import Link from "next/link";
 import InputBase from "@mui/material/InputBase";
 import { Paper, useMediaQuery, useTheme } from "@mui/material";
 import Divider from "@mui/material/Divider";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import getNavMenuItems from "./components/getNavMenu";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [menuItems, setMenuItems] = useState<{ title: string; link: string }[]>(
+    []
+  );
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  useEffect(() => {
+    const fetchMenuItems = async () => {
+      const items = await getNavMenuItems();
+      setMenuItems(items);
+    };
+    fetchMenuItems();
+  }, []);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -63,18 +75,11 @@ const Header = () => {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}>
-            <MenuItem onClick={handleMenuClose}>
-              <Link href="/">Homepage</Link>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-              <Link href="/projects">Projects</Link>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-              <Link href="/about">About</Link>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-              <Link href="/contact">Contact</Link>
-            </MenuItem>
+            {menuItems.map((item) => (
+              <MenuItem key={item.link} onClick={handleMenuClose}>
+                <Link href={item.link}>{item.title}</Link>
+              </MenuItem>
+            ))}
           </Menu>
         </Toolbar>
       </AppBar>
