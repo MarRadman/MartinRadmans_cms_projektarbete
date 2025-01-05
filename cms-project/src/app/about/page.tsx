@@ -12,7 +12,6 @@ const About = async () => {
 
   const imageUrl = Array.isArray(image) ? image[0] : image;
 
-  console.log(image);
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h1">{title}</Typography>
