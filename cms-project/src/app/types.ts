@@ -6,6 +6,7 @@ export interface ProjectData {
   slug: string;
   technologies?: string[];
   url?: string;
+  category?: string;
 }
 
 export interface PageData {
@@ -22,4 +23,5 @@ export interface PageData {
   github?: string;
   linkedin?: string;
   projects?: ProjectData[];
+  categories?: string[];
 }

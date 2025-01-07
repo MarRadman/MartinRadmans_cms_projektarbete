@@ -1,3 +1,5 @@
+"use client";
+
 import { getPageContent } from "../components/getPageContent";
 import { PageData } from "@/app/types";
 import Link from "next/link";
@@ -10,11 +12,29 @@ import {
   CardMedia,
   Button,
   ImageListItem,
+  Select,
+  MenuItem,
 } from "@mui/material";
+import { useState, useEffect } from "react";
 import styles from "./style.module.css";
 
-const Projects = async () => {
-  const pageData: PageData | null = await getPageContent("projects");
+const Projects = () => {
+  const [category, setCategory] = useState<string | undefined>(undefined);
+  const [pageData, setPageData] = useState<PageData | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getPageContent("projects", undefined, category);
+      setPageData(data);
+    };
+    fetchData();
+  }, [category]);
+
+  const handleCategoryChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setCategory(event.target.value as string);
+  };
 
   if (!pageData) {
     return <Typography variant="h1">Projects content not found</Typography>;
@@ -28,6 +48,18 @@ const Projects = async () => {
         alignItems: "center",
         p: 5,
       }}>
+      <Select
+        value={category || ""}
+        onChange={handleCategoryChange}
+        displayEmpty
+        sx={{ mb: 3 }}>
+        <MenuItem value="">All Categories</MenuItem>
+        {pageData.categories?.map((cat, index) => (
+          <MenuItem key={index} value={cat}>
+            {cat}
+          </MenuItem>
+        ))}
+      </Select>
       {pageData.projects && (
         <div className={styles.imageList}>
           {pageData.projects.map((project, index) => (

@@ -3,9 +3,10 @@ import { PageData, ProjectData } from "@/app/types";
 
 export const getPageContent = async (
   contentType: string,
-  slug?: string
+  slug?: string,
+  category?: string
 ): Promise<PageData | null> => {
-  const pageData = await fetchData(contentType, slug);
+  const pageData = await fetchData(contentType, slug, category);
   const page = pageData[0]?.fields;
 
   if (!page) {
@@ -83,6 +84,7 @@ export const getPageContent = async (
         slug: projectSlug,
         technologies: projectTechnologies,
         url: projectUrl,
+        category: projectFields.category || "",
       };
     });
   };
@@ -99,6 +101,11 @@ export const getPageContent = async (
     ? makeAbsoluteUrl(page.image.fields.file.url)
     : "";
 
+  // Extract unique categories that exist.
+  const categories = Array.from(
+    new Set(projects.map((project) => project.category))
+  );
+
   return {
     title: String(page.title) || "Untitled",
     content: textContent,
@@ -113,5 +120,6 @@ export const getPageContent = async (
     github: String(page.github) || "",
     linkedin: String(page.linkedin) || "",
     projects,
+    categories,
   };
 };
