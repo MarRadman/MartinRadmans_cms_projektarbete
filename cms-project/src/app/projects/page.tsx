@@ -11,7 +11,7 @@ import {
   Button,
   ImageListItem,
 } from "@mui/material";
-import styles from "./style.module.css"; // Import the CSS module
+import styles from "./style.module.css";
 
 const Projects = async () => {
   const pageData: PageData | null = await getPageContent("projects");

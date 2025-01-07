@@ -71,7 +71,6 @@ const Header = () => {
             <MenuIcon />
           </IconButton>
           <Menu
-            className="navmenu-dropdownmenu"
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}>
