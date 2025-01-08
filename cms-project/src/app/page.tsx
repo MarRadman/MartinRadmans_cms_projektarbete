@@ -13,16 +13,35 @@ const HomePage = async () => {
   const imageUrl = Array.isArray(image) ? image[0] : image;
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h1">{title}</Typography>
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, mb: 2 }}>
-        <Avatar
-          alt={`Profile image`}
-          src={imageUrl}
-          sx={{ width: 300, height: 300 }}
-        />
-      </Box>
-      <Typography variant="body1">{content}</Typography>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        backgroundColor: "#f5f5f5",
+        p: 3,
+      }}>
+      <Typography variant="h1" component="h1" gutterBottom>
+        {title}
+      </Typography>
+      <Avatar
+        alt="Profile image"
+        src={imageUrl}
+        sx={{
+          width: { xs: 200, sm: 300, md: 400, lg: 500, xl: 600 },
+          height: { xs: 200, sm: 300, md: 400, lg: 500, xl: 600 },
+          mb: 3,
+        }}
+      />
+      <Typography
+        variant="body1"
+        color="textSecondary"
+        align="center"
+        sx={{ maxWidth: 800 }}>
+        {content}
+      </Typography>
     </Box>
   );
 };

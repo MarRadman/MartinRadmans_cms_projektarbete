@@ -15,10 +15,22 @@ const theme = createTheme({
   },
   typography: {
     h1: {
-      fontSize: 40,
+      fontSize: "2.5rem",
+      [`@media (min-width:600px)`]: {
+        fontSize: "3rem",
+      },
+      [`@media (min-width:960px)`]: {
+        fontSize: "4rem",
+      },
     },
-    h2: {
-      fontSize: 20,
+    body1: {
+      fontSize: "1rem",
+      [`@media (min-width:600px)`]: {
+        fontSize: "1.25rem",
+      },
+      [`@media (min-width:960px)`]: {
+        fontSize: "1.5rem",
+      },
     },
   },
   components: {
@@ -33,14 +45,14 @@ const theme = createTheme({
         ".navmenu-dropdownmenu": {
           textDecoration: "none",
           "& a": {
-            color: "inherit", // Inherit color from parent
-            textDecoration: "none", // Remove underline
+            color: "inherit",
+            textDecoration: "none",
           },
         },
         img: {
-          width: "100%", // Set the desired width
-          height: "auto", // Maintain aspect ratio
-          maxWidth: "500px", // Set a maximum width
+          width: "100%",
+          height: "auto",
+          maxWidth: "500px",
         },
         ".center-content": {
           display: "flex",

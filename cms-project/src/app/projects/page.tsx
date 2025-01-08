@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingData from "@/app/components/getLoading";
 import { getPageContent } from "../components/getPageContent";
 import { ProjectData } from "@/app/types";
 import Link from "next/link";
@@ -15,7 +16,6 @@ import {
   Select,
   MenuItem,
   SelectChangeEvent,
-  CircularProgress,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import styles from "./style.module.css";
@@ -56,17 +56,7 @@ const Projects = () => {
   };
 
   if (loading) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}>
-        <CircularProgress />
-      </Box>
-    );
+    return <LoadingData />;
   }
 
   if (!allProjects.length) {
