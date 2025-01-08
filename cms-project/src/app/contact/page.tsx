@@ -2,9 +2,10 @@ import { Box, Typography, Avatar, Link, IconButton } from "@mui/material";
 import { getPageContent } from "../components/getPageContent";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { ContactPageData } from "@/app/types";
 
 const Contact = async () => {
-  const pageData = await getPageContent("contact");
+  const pageData = (await getPageContent("contact")) as ContactPageData;
 
   if (!pageData) {
     return <Typography variant="h1">Contact content not found</Typography>;

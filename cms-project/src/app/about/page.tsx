@@ -1,11 +1,12 @@
 import { getPageContent } from "../components/getPageContent";
 import { Box, Typography, Avatar } from "@mui/material";
+import { AboutPageData } from "@/app/types";
 
 const About = async () => {
-  const pageData = await getPageContent("about");
+  const pageData = (await getPageContent("about")) as AboutPageData;
 
   if (!pageData) {
-    return <Typography variant="h1">Contact content not found</Typography>;
+    return <Typography variant="h1">About content not found</Typography>;
   }
 
   const { title, content, image } = pageData;

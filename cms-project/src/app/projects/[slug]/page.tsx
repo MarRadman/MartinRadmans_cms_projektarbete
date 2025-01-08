@@ -1,12 +1,15 @@
 import { getPageContent } from "@/app/components/getPageContent";
-import { PageData } from "@/app/types";
+import { ProjectData } from "@/app/types";
 import { Box, Typography, Card, CardMedia, Button, Chip } from "@mui/material";
 import Link from "next/link";
 import styles from "./style.module.css";
 
 const ProjectPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = await params;
-  const projectData: PageData | null = await getPageContent("project", slug);
+  const projectData: ProjectData | null = (await getPageContent(
+    "project",
+    slug
+  )) as ProjectData | null;
 
   if (!projectData) {
     return <Typography variant="h1">Project content not found</Typography>;

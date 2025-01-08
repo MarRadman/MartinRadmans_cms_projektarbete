@@ -1,8 +1,9 @@
 import { getPageContent } from "./components/getPageContent";
 import { Box, Typography, Avatar } from "@mui/material";
+import { HomePageData } from "@/app/types";
 
 const HomePage = async () => {
-  const pageData = await getPageContent("homepage");
+  const pageData = (await getPageContent("homepage")) as HomePageData;
 
   if (!pageData) {
     return <Typography variant="h1">Homepage content not found</Typography>;

@@ -2,7 +2,7 @@
 
 import LoadingData from "@/app/components/getLoading";
 import { getPageContent } from "../components/getPageContent";
-import { ProjectData } from "@/app/types";
+import { ProjectsPageData } from "@/app/types";
 import Link from "next/link";
 import {
   Box,
@@ -30,7 +30,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const data = await getPageContent("projects");
+      const data = (await getPageContent("projects")) as ProjectsPageData;
       if (data) {
         setAllProjects(data.projects || []);
         setFilteredProjects(data.projects || []);

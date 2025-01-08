@@ -1,24 +1,30 @@
 import { fetchData } from "../lib/contentful";
-import { PageData, ProjectData } from "@/app/types";
+import {
+  HomePageData,
+  AboutPageData,
+  ContactPageData,
+  ProjectsPageData,
+  ProjectData,
+} from "@/app/types";
 
 export const getPageContent = async (
   contentType: string,
   slug?: string,
   category?: string
-): Promise<PageData | null> => {
+): Promise<
+  | HomePageData
+  | AboutPageData
+  | ContactPageData
+  | ProjectsPageData
+  | ProjectData
+  | null
+> => {
   const pageData = await fetchData(contentType, slug, category);
   const page = pageData[0]?.fields;
 
   if (!page) {
     return null;
   }
-
-  const makeAbsoluteUrl = (url: string): string => {
-    if (url.startsWith("//")) {
-      return `https:${url}`;
-    }
-    return url;
-  };
 
   const extractText = (content: any[]): string => {
     if (!Array.isArray(content)) {
@@ -56,9 +62,7 @@ export const getPageContent = async (
     if (!Array.isArray(imagesField)) {
       return []; // Return an empty array if imagesField is not an array
     }
-    return imagesField.map((image: any) =>
-      makeAbsoluteUrl(image.fields.file.url)
-    );
+    return imagesField.map((image: any) => image.fields.file.url);
   };
 
   const extractProjects = (projects: any[]): ProjectData[] => {
@@ -89,42 +93,56 @@ export const getPageContent = async (
     });
   };
 
-  const textContent = extractText(page.content?.content || []);
-  const textDescription = extractText(page.description?.de || []);
-  const technologies = extractTechnologies(page.technologies?.content || []);
-  const images = extractImages(page.images || []);
-  const url = page.url || "";
-  const projects = page.projects ? extractProjects(page.projects) : [];
+  switch (contentType) {
+    case "homepage":
+      return {
+        title: page.title,
+        content: extractText(page.content?.content || []),
+        image: extractImages(page.image || []),
+      } as HomePageData;
 
-  // Filter projects by category if category is provided
-  const filteredProjects = category
-    ? projects.filter((project) => project.category === category)
-    : projects;
+    case "about":
+      return {
+        title: page.title,
+        content: extractText(page.content?.content || []),
+        image: extractImages(page.image || []),
+      } as AboutPageData;
 
-  // Extract single image from the 'image' field if it exists
-  const image = page.image?.fields?.file?.url
-    ? makeAbsoluteUrl(page.image.fields.file.url)
-    : "";
+    case "contact":
+      return {
+        title: page.title,
+        image: extractImages(page.image || []),
+        address: page.address,
+        email: page.email,
+        phone: page.phone,
+        github: page.github,
+        linkedin: page.linkedin,
+      } as ContactPageData;
 
-  // Extract unique categories that exist.
-  const categories = Array.from(
-    new Set(projects.map((project) => project.category))
-  );
+    case "projects":
+      const projects = extractProjects(page.projects || []);
+      const categories = Array.from(
+        new Set(projects.map((project) => project.category))
+      );
+      return {
+        title: page.title,
+        projects,
+        categories,
+      } as ProjectsPageData;
 
-  return {
-    title: String(page.title) || "Untitled",
-    content: textContent,
-    description: textDescription,
-    technologies,
-    url,
-    images,
-    image: image ? [image] : [], // Ensure image is always an array of strings
-    address: String(page.address) || "",
-    email: String(page.email) || "",
-    phone: String(page.phone) || "",
-    github: String(page.github) || "",
-    linkedin: String(page.linkedin) || "",
-    projects: filteredProjects,
-    categories,
-  };
+    case "project":
+      return {
+        title: page.title,
+        content: extractText(page.content?.content || []),
+        description: page.description || "",
+        images: extractImages(page.images || []),
+        slug: page.slug,
+        technologies: extractTechnologies(page.technologies?.content || []),
+        url: page.url || "",
+        category: page.category || "",
+      } as ProjectData;
+
+    default:
+      return null;
+  }
 };
