@@ -96,6 +96,11 @@ export const getPageContent = async (
   const url = page.url || "";
   const projects = page.projects ? extractProjects(page.projects) : [];
 
+  // Filter projects by category if category is provided
+  const filteredProjects = category
+    ? projects.filter((project) => project.category === category)
+    : projects;
+
   // Extract single image from the 'image' field if it exists
   const image = page.image?.fields?.file?.url
     ? makeAbsoluteUrl(page.image.fields.file.url)
@@ -113,13 +118,13 @@ export const getPageContent = async (
     technologies,
     url,
     images,
-    image,
+    image: image ? [image] : [], // Ensure image is always an array of strings
     address: String(page.address) || "",
     email: String(page.email) || "",
     phone: String(page.phone) || "",
     github: String(page.github) || "",
     linkedin: String(page.linkedin) || "",
-    projects,
+    projects: filteredProjects,
     categories,
   };
 };
