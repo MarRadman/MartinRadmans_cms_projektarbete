@@ -20,10 +20,13 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
       <div className={styles.stack}>
         <Typography
           variant="h1"
+          component="h1"
           gutterBottom
           sx={{
             fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
-            marginBottom: { xs: "1rem", sm: "1.5rem", md: "2rem" },
+            color: "#333",
+            textAlign: "center",
+            mb: 3,
           }}>
           {projectData.title}
         </Typography>

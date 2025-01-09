@@ -71,6 +71,18 @@ const Projects = () => {
         alignItems: "center",
         p: 5,
       }}>
+      <Typography
+        variant="h1"
+        component="h1"
+        gutterBottom
+        sx={{
+          fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
+          color: "#333",
+          textAlign: "center",
+          mb: 3,
+        }}>
+        Projects
+      </Typography>
       <Select
         value={category}
         onChange={handleCategoryChange}

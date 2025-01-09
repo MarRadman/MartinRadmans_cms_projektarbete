@@ -1,4 +1,11 @@
-import { Box, Typography, Avatar, Link, IconButton } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Avatar,
+  Link,
+  IconButton,
+  Paper,
+} from "@mui/material";
 import { getPageContent } from "../components/getPageContent";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -17,37 +24,52 @@ const Contact = async () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h1" gutterBottom>
+      <Typography variant="h1" gutterBottom align="center">
         {title}
       </Typography>
-      <Avatar
-        alt="Profile Picture"
-        src={imageUrl}
-        sx={{ width: 200, height: 200, mb: 2 }}
-      />
-      <Typography variant="h6">Contact Information</Typography>
-      <Typography variant="body1">Address: {address}</Typography>
-      <Typography variant="body1">
-        Email: <Link href={`mailto:${email}`}>{email}</Link>
-      </Typography>
-      <Typography variant="body1">
-        Phone: <Link href={`tel:${phone}`}>{phone}</Link>
-      </Typography>
-      <Box sx={{ display: "flex", gap: 2 }}>
-        <IconButton
-          component={Link}
-          href={linkedin}
-          target="_blank"
-          aria-label="LinkedIn">
-          <LinkedInIcon />
-        </IconButton>
-        <IconButton
-          component={Link}
-          href={github}
-          target="_blank"
-          aria-label="GitHub">
-          <GitHubIcon />
-        </IconButton>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 3,
+        }}>
+        <Avatar
+          alt="Profile Picture"
+          src={imageUrl}
+          sx={{ width: 200, height: 200, mb: { xs: 2, md: 0 } }}
+        />
+        <Paper elevation={3} sx={{ p: 3, flexGrow: 1, maxWidth: 600 }}>
+          <Typography variant="h6" gutterBottom>
+            Contact Information
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Address: {address}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Email: <Link href={`mailto:${email}`}>{email}</Link>
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Phone: <Link href={`tel:${phone}`}>{phone}</Link>
+          </Typography>
+          <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+            <IconButton
+              component={Link}
+              href={linkedin}
+              target="_blank"
+              aria-label="LinkedIn">
+              <LinkedInIcon />
+            </IconButton>
+            <IconButton
+              component={Link}
+              href={github}
+              target="_blank"
+              aria-label="GitHub">
+              <GitHubIcon />
+            </IconButton>
+          </Box>
+        </Paper>
       </Box>
     </Box>
   );

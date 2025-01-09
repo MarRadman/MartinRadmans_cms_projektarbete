@@ -30,7 +30,16 @@ const About = async () => {
             alignItems: "center",
             gap: 2,
           }}>
-          <Typography variant="h2" gutterBottom align="center">
+          <Typography
+            variant="h1"
+            component="h1"
+            gutterBottom
+            sx={{
+              fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
+              color: "#333",
+              textAlign: "center",
+              mb: 3,
+            }}>
             {title}
           </Typography>
           <Avatar

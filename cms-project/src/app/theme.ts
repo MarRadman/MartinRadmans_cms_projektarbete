@@ -14,6 +14,7 @@ const theme = createTheme({
     },
   },
   typography: {
+    fontFamily: "Roboto, Arial, sans-serif",
     h1: {
       fontSize: "2.5rem",
       [`@media (min-width:600px)`]: {
@@ -74,6 +75,7 @@ const theme = createTheme({
       styleOverrides: {
         body: {
           backgroundColor: grey[100], // Background color (Light Grey)
+          fontFamily: "Roboto, Arial, sans-serif",
         },
         ".navmenu": {
           backgroundColor: blue[700], // Navmenu color (Blue)
