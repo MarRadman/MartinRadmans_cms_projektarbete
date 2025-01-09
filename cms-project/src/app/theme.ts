@@ -23,6 +23,24 @@ const theme = createTheme({
         fontSize: "4rem",
       },
     },
+    h2: {
+      fontSize: "2rem",
+      [`@media (min-width:600px)`]: {
+        fontSize: "2.5rem",
+      },
+      [`@media (min-width:960px)`]: {
+        fontSize: "3rem",
+      },
+    },
+    h6: {
+      fontSize: "1.25rem",
+      [`@media (min-width:600px)`]: {
+        fontSize: "1.5rem",
+      },
+      [`@media (min-width:960px)`]: {
+        fontSize: "1.75rem",
+      },
+    },
     body1: {
       fontSize: "1rem",
       [`@media (min-width:600px)`]: {
@@ -30,6 +48,24 @@ const theme = createTheme({
       },
       [`@media (min-width:960px)`]: {
         fontSize: "1.5rem",
+      },
+    },
+    body2: {
+      fontSize: "0.875rem",
+      [`@media (min-width:600px)`]: {
+        fontSize: "1rem",
+      },
+      [`@media (min-width:960px)`]: {
+        fontSize: "1.125rem",
+      },
+    },
+    subtitle1: {
+      fontSize: "1.125rem",
+      [`@media (min-width:600px)`]: {
+        fontSize: "1.25rem",
+      },
+      [`@media (min-width:960px)`]: {
+        fontSize: "1.375rem",
       },
     },
   },

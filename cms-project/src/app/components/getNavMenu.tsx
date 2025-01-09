@@ -1,17 +1,20 @@
 import { fetchData } from "../lib/contentful";
+import { NavMenuData, NavMenuItem } from "@/app/types";
 
-const getNavMenuItems = async (): Promise<
-  { title: string; link: string }[]
-> => {
+const getNavMenuItems = async (): Promise<NavMenuData> => {
   const data = await fetchData("navigationMenu");
+  const title =
+    typeof data[0]?.fields?.title === "string"
+      ? data[0].fields.title
+      : "Default Title";
   const itemsField = data[0]?.fields?.items;
-  const items = Array.isArray(itemsField)
+  const items: NavMenuItem[] = Array.isArray(itemsField)
     ? itemsField.map((item: any) => ({
         title: item.fields.title,
         link: item.fields.link,
       }))
     : [];
-  return items || [];
+  return { title, items };
 };
 
 export default getNavMenuItems;

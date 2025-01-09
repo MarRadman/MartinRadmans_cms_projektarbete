@@ -4,10 +4,26 @@ export interface HomePageData {
   image: string[];
 }
 
+export interface Education {
+  title: string;
+  school: string;
+  year: string;
+  description: string;
+}
+
+export interface WorkExperience {
+  role: string;
+  company: string;
+  duration: string;
+  description: string;
+}
+
 export interface AboutPageData {
   title: string;
   content: string;
   image: string[];
+  education: Education[];
+  workExperience: WorkExperience[];
 }
 
 export interface ContactPageData {
@@ -35,4 +51,14 @@ export interface ProjectsPageData {
   title: string;
   projects: ProjectData[];
   categories: string[];
+}
+
+export interface NavMenuItem {
+  title: string;
+  link: string;
+}
+
+export interface NavMenuData {
+  title: string;
+  items: NavMenuItem[];
 }

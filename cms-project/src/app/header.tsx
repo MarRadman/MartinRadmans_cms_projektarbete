@@ -18,13 +18,15 @@ const Header = () => {
   const [menuItems, setMenuItems] = useState<{ title: string; link: string }[]>(
     []
   );
+  const [navTitle, setNavTitle] = useState<string>("Simple is Key");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const fetchMenuItems = async () => {
-      const items = await getNavMenuItems();
+      const { title, items } = await getNavMenuItems();
       setMenuItems(items);
+      setNavTitle(title);
     };
     fetchMenuItems();
   }, []);
@@ -41,8 +43,8 @@ const Header = () => {
     <Box className="navmenu" sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "inherit" }}>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <h1>Headless CMS Project</h1>
+          <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+            {navTitle}
           </Typography>
           {!isMobile && (
             <Paper

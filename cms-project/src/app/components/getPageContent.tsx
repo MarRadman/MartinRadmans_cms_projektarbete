@@ -5,6 +5,8 @@ import {
   ContactPageData,
   ProjectsPageData,
   ProjectData,
+  Education,
+  WorkExperience,
 } from "@/app/types";
 
 export const getPageContent = async (
@@ -26,20 +28,22 @@ export const getPageContent = async (
     return null;
   }
 
-  const extractText = (content: any[]): string => {
-    if (!Array.isArray(content)) {
-      return ""; // Return an empty string if content is not an array
+  const extractText = (content: any): string => {
+    if (Array.isArray(content)) {
+      return content
+        .map((item) => {
+          if (item.nodeType === "text") {
+            return item.value;
+          } else if (item.content) {
+            return extractText(item.content);
+          }
+          return "";
+        })
+        .join(" ");
+    } else if (typeof content === "string") {
+      return content;
     }
-    return content
-      .map((item) => {
-        if (item.nodeType === "text") {
-          return item.value;
-        } else if (item.content) {
-          return extractText(item.content);
-        }
-        return "";
-      })
-      .join(" ");
+    return ""; // Return an empty string if content is not an array or string
   };
 
   const extractTechnologies = (content: any[]): string[] => {
@@ -58,11 +62,39 @@ export const getPageContent = async (
       .filter((tech) => tech.trim() !== ""); // Filter out empty strings
   };
 
-  const extractImages = (imagesField: any[]): string[] => {
-    if (!Array.isArray(imagesField)) {
-      return []; // Return an empty array if imagesField is not an array
+  const extractImages = (imagesField: any): string[] => {
+    if (Array.isArray(imagesField)) {
+      return imagesField.map((image: any) => image.fields.file.url);
+    } else if (imagesField?.fields?.file?.url) {
+      return [imagesField.fields.file.url];
     }
-    return imagesField.map((image: any) => image.fields.file.url);
+    return []; // Return an empty array if imagesField is not an array or a single image object
+  };
+
+  const extractEducation = (educationField: any[]): Education[] => {
+    if (!Array.isArray(educationField)) {
+      return []; // Return an empty array if educationField is not an array
+    }
+    return educationField.map((item) => ({
+      title: item.fields.title,
+      school: item.fields.school,
+      year: item.fields.year,
+      description: extractText(item.fields.description?.content || ""),
+    }));
+  };
+
+  const extractWorkExperience = (
+    workExperienceField: any[]
+  ): WorkExperience[] => {
+    if (!Array.isArray(workExperienceField)) {
+      return []; // Return an empty array if workExperienceField is not an array
+    }
+    return workExperienceField.map((item) => ({
+      role: item.fields.role,
+      company: item.fields.company,
+      duration: item.fields.duration,
+      description: extractText(item.fields.description?.content || ""),
+    }));
   };
 
   const extractProjects = (projects: any[]): ProjectData[] => {
@@ -98,20 +130,22 @@ export const getPageContent = async (
       return {
         title: page.title,
         content: extractText(page.content?.content || []),
-        image: extractImages(page.image || []),
+        image: extractImages(page.image),
       } as HomePageData;
 
     case "about":
       return {
         title: page.title,
         content: extractText(page.content?.content || []),
-        image: extractImages(page.image || []),
+        image: extractImages(page.image),
+        education: extractEducation(page.education || []),
+        workExperience: extractWorkExperience(page.workExperience || []),
       } as AboutPageData;
 
     case "contact":
       return {
         title: page.title,
-        image: extractImages(page.image || []),
+        image: extractImages(page.image),
         address: page.address,
         email: page.email,
         phone: page.phone,
@@ -120,7 +154,9 @@ export const getPageContent = async (
       } as ContactPageData;
 
     case "projects":
-      const projects = extractProjects(page.projects || []);
+      const projects = Array.isArray(page.projects)
+        ? extractProjects(page.projects)
+        : [];
       const categories = Array.from(
         new Set(projects.map((project) => project.category))
       );
@@ -135,7 +171,7 @@ export const getPageContent = async (
         title: page.title,
         content: extractText(page.content?.content || []),
         description: page.description || "",
-        images: extractImages(page.images || []),
+        images: extractImages(page.images),
         slug: page.slug,
         technologies: extractTechnologies(page.technologies?.content || []),
         url: page.url || "",
