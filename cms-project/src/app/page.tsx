@@ -39,7 +39,7 @@ const HomePage = async () => {
       <CardMedia
         component="img"
         alt="Profile image"
-        image={`https://${imageUrl}`}
+        image={imageUrl}
         sx={{
           width: { xs: "90%", sm: "80%", md: "70%", lg: "60%", xl: "50%" },
           height: "auto",

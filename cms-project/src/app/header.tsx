@@ -40,51 +40,53 @@ const Header = () => {
   };
 
   return (
-    <Box className="navmenu" sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "inherit" }}>
-        <Toolbar>
-          <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
-            {navTitle}
-          </Typography>
-          {!isMobile && (
-            <Paper
-              component="form"
-              sx={{
-                p: "2px 4px",
-                display: "flex",
-                alignItems: "center",
-                width: "400",
-              }}>
-              <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Search"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Paper>
-          )}
-          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 5 }}
-            onClick={handleMenuOpen}>
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleMenuClose}>
-            {menuItems.map((item) => (
-              <MenuItem key={item.link} onClick={handleMenuClose}>
-                <Link href={item.link}>{item.title}</Link>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <header>
+      <Box className="navmenu" sx={{ flexGrow: 1 }}>
+        <AppBar position="static" sx={{ backgroundColor: "inherit" }}>
+          <Toolbar>
+            <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+              {navTitle}
+            </Typography>
+            {!isMobile && (
+              <Paper
+                component="form"
+                sx={{
+                  p: "2px 4px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: "400",
+                }}>
+                <InputBase
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Search"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Paper>
+            )}
+            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 5 }}
+              onClick={handleMenuOpen}>
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}>
+              {menuItems.map((item) => (
+                <MenuItem key={item.link} onClick={handleMenuClose}>
+                  <Link href={item.link}>{item.title}</Link>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </header>
   );
 };
 

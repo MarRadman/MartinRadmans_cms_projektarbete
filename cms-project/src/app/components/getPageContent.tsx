@@ -64,9 +64,11 @@ export const getPageContent = async (
 
   const extractImages = (imagesField: any): string[] => {
     if (Array.isArray(imagesField)) {
-      return imagesField.map((image: any) => image.fields.file.url);
+      return imagesField.map(
+        (image: any) => `https://${image.fields.file.url}`
+      );
     } else if (imagesField?.fields?.file?.url) {
-      return [imagesField.fields.file.url];
+      return [`https://${imagesField.fields.file.url}`];
     }
     return []; // Return an empty array if imagesField is not an array or a single image object
   };
