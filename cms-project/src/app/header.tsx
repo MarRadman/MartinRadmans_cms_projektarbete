@@ -42,12 +42,24 @@ const Header = () => {
   return (
     <header>
       <Box className="navmenu" sx={{ flexGrow: 1 }}>
-        <AppBar position="static" sx={{ backgroundColor: "inherit" }}>
+        <AppBar
+          position="static"
+          sx={{ backgroundColor: theme.palette.primary.main }}>
           <Toolbar>
-            <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+            <Typography
+              variant="h1"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
+                fontWeight: "bold",
+                color: theme.palette.secondary.main,
+                padding: "0.5rem 1rem",
+                textAlign: "center",
+              }}>
               {navTitle}
             </Typography>
-            {!isMobile && (
+            {/* {!isMobile && ( // Searchbar implemented. None function right now.
               <Paper
                 component="form"
                 sx={{
@@ -62,18 +74,19 @@ const Header = () => {
                   inputProps={{ "aria-label": "search" }}
                 />
               </Paper>
-            )}
+            )} */}
             <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
             <IconButton
               size="large"
-              edge="start"
+              edge="end"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 5 }}
+              sx={{ ml: "auto" }}
               onClick={handleMenuOpen}>
               <MenuIcon />
             </IconButton>
             <Menu
+              className="navmenu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}>

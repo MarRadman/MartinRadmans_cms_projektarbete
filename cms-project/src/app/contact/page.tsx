@@ -24,7 +24,7 @@ const Contact = async () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h1" gutterBottom align="center">
+      <Typography variant="h2" gutterBottom align="center">
         {title}
       </Typography>
       <Box
@@ -38,7 +38,7 @@ const Contact = async () => {
         <Avatar
           alt="Profile Picture"
           src={imageUrl}
-          sx={{ width: 200, height: 200, mb: { xs: 2, md: 0 } }}
+          sx={{ width: 300, height: 300, mb: { xs: 2, md: 0 } }}
         />
         <Paper elevation={3} sx={{ p: 3, flexGrow: 1, maxWidth: 600 }}>
           <Typography variant="h6" gutterBottom>
@@ -48,10 +48,16 @@ const Contact = async () => {
             Address: {address}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Email: <Link href={`mailto:${email}`}>{email}</Link>
+            Email:{" "}
+            <Link color="secondary" href={`mailto:${email}`}>
+              {email}
+            </Link>
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Phone: <Link href={`tel:${phone}`}>{phone}</Link>
+            Phone:{" "}
+            <Link color="secondary" href={`tel:${phone}`}>
+              {phone}
+            </Link>
           </Typography>
           <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
             <IconButton

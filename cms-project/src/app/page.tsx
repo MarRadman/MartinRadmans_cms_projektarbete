@@ -21,18 +21,16 @@ const HomePage = async () => {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        backgroundColor: "#f5f5f5",
         p: 3,
       }}>
       <Typography
-        variant="h1"
-        component="h1"
+        variant="h2"
+        component="h2"
         gutterBottom
         sx={{
-          fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
-          color: "#333",
           textAlign: "center",
           mb: 3,
+          fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
         }}>
         {title}
       </Typography>

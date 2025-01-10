@@ -72,12 +72,11 @@ const Projects = () => {
         p: 5,
       }}>
       <Typography
-        variant="h1"
-        component="h1"
+        variant="h2"
+        component="h2"
         gutterBottom
         sx={{
           fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
-          color: "#333",
           textAlign: "center",
           mb: 3,
         }}>
@@ -116,6 +115,7 @@ const Projects = () => {
               <CardActions>
                 <Button
                   size="small"
+                  color="secondary"
                   component={Link}
                   href={`/projects/${project.slug}`}>
                   Learn More

@@ -31,12 +31,11 @@ const About = async () => {
             gap: 2,
           }}>
           <Typography
-            variant="h1"
-            component="h1"
+            variant="h2"
+            component="h2"
             gutterBottom
             sx={{
               fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
-              color: "#333",
               textAlign: "center",
               mb: 3,
             }}>
@@ -49,7 +48,10 @@ const About = async () => {
           />
         </Box>
         <Paper elevation={3} sx={{ p: 3, flexGrow: 1 }}>
-          <Typography variant="body1" gutterBottom>
+          <Typography variant="h6" gutterBottom>
+            Presentation
+          </Typography>
+          <Typography variant="body2" gutterBottom>
             {content}
           </Typography>
           <Divider sx={{ my: 2 }} />

@@ -1,6 +1,14 @@
 import { getPageContent } from "@/app/components/getPageContent";
 import { ProjectData } from "@/app/types";
-import { Box, Typography, Card, CardMedia, Button, Chip } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Card,
+  CardMedia,
+  Button,
+  Chip,
+  Paper,
+} from "@mui/material";
 import Link from "next/link";
 import styles from "./style.module.css";
 
@@ -18,41 +26,42 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <Box className={styles.container}>
       <div className={styles.stack}>
-        <Typography
-          variant="h1"
-          component="h1"
-          gutterBottom
-          sx={{
-            fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
-            color: "#333",
-            textAlign: "center",
-            mb: 3,
-          }}>
-          {projectData.title}
-        </Typography>
-        <Typography
-          variant="body1"
-          paragraph
-          sx={{
-            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-            maxWidth: "800px",
-            textAlign: "center",
-            marginBottom: { xs: "1rem", sm: "1.5rem", md: "2rem" },
-          }}>
-          {projectData.content}
-        </Typography>
+        <Paper>
+          <Typography
+            variant="h2"
+            component="h2"
+            gutterBottom
+            sx={{
+              fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
+              textAlign: "center",
+              mb: 3,
+            }}>
+            {projectData.title}
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+              maxWidth: "1000px",
+              textAlign: "center",
+              marginBottom: { xs: "1rem", sm: "1.5rem", md: "2rem" },
+            }}>
+            {projectData.content}
+          </Typography>
+        </Paper>
         {projectData.technologies && (
           <Box sx={{ mt: 2 }}>
             <Typography
               variant="h6"
+              color="secondary"
               sx={{
                 fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
                 marginBottom: { xs: "0.5rem", sm: "1rem", md: "1.5rem" },
               }}>
-              Technologies:
+              Technologies
             </Typography>
             {projectData.technologies.map((tech, index) => (
-              <Chip key={index} label={tech} sx={{ m: 0.5 }} />
+              <Chip key={index} label={tech} sx={{ m: 0.5 }} color="primary" />
             ))}
           </Box>
         )}
@@ -60,7 +69,7 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
           <Box sx={{ mt: 2 }}>
             <Button
               variant="contained"
-              color="secondary"
+              color="primary"
               href={projectData.url}
               target="_blank">
               Visit Project

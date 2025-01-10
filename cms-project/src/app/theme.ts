@@ -1,22 +1,28 @@
 import { createTheme } from "@mui/material/styles";
-import { grey, blue, orange } from "@mui/material/colors";
+import { grey, teal, red } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: blue[700], // Primary color (Blue)
+      main: grey[200], // Primary color (Teal)
     },
     secondary: {
-      main: orange[500], // Secondary color (Orange)
+      main: red[300], // Secondary color (Light Grey)
     },
     background: {
       default: grey[100], // Background color (Light Grey)
+    },
+    text: {
+      primary: grey[900], // Primary text color (Dark Grey)
+      secondary: grey[600], // Secondary text color (Medium Grey)
     },
   },
   typography: {
     fontFamily: "Roboto, Arial, sans-serif",
     h1: {
       fontSize: "2.5rem",
+      fontWeight: "bold",
+      color: red[300],
       [`@media (min-width:600px)`]: {
         fontSize: "3rem",
       },
@@ -26,15 +32,22 @@ const theme = createTheme({
     },
     h2: {
       fontSize: "2rem",
+      fontWeight: "bold",
+      color: red[300],
       [`@media (min-width:600px)`]: {
-        fontSize: "2.5rem",
+        fontSize: "2rem",
       },
       [`@media (min-width:960px)`]: {
-        fontSize: "3rem",
+        fontSize: "2.5rem",
       },
+    },
+    h5: {
+      color: red[300],
     },
     h6: {
       fontSize: "1.25rem",
+      fontWeight: "bold",
+      color: red[300],
       [`@media (min-width:600px)`]: {
         fontSize: "1.5rem",
       },
@@ -44,6 +57,7 @@ const theme = createTheme({
     },
     body1: {
       fontSize: "1rem",
+      color: grey[900],
       [`@media (min-width:600px)`]: {
         fontSize: "1.25rem",
       },
@@ -53,6 +67,7 @@ const theme = createTheme({
     },
     body2: {
       fontSize: "0.875rem",
+      color: grey[600],
       [`@media (min-width:600px)`]: {
         fontSize: "1rem",
       },
@@ -62,6 +77,7 @@ const theme = createTheme({
     },
     subtitle1: {
       fontSize: "1.125rem",
+      color: grey[900],
       [`@media (min-width:600px)`]: {
         fontSize: "1.25rem",
       },
@@ -74,16 +90,13 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: grey[100], // Background color (Light Grey)
+          backgroundColor: grey[100],
           fontFamily: "Roboto, Arial, sans-serif",
         },
         ".navmenu": {
-          backgroundColor: blue[700], // Navmenu color (Blue)
-        },
-        ".navmenu-dropdownmenu": {
           textDecoration: "none",
           "& a": {
-            color: "inherit",
+            color: red[300],
             textDecoration: "none",
           },
         },
@@ -103,11 +116,19 @@ const theme = createTheme({
         ".footer": {
           padding: "16px 32px",
           marginTop: "auto",
-          backgroundColor: grey[300], // Footer color (Darker Grey)
+          backgroundColor: grey[300],
         },
         ".footer-links": {
           display: "flex",
           justifyContent: "center",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          borderRadius: 8,
         },
       },
     },
