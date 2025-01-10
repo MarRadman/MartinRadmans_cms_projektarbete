@@ -18,7 +18,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Roboto, Arial, sans-serif",
+    fontFamily: "Montserrat, Arial, sans-serif",
     h1: {
       fontSize: "2.5rem",
       fontWeight: "bold",
@@ -91,7 +91,7 @@ const theme = createTheme({
       styleOverrides: {
         body: {
           backgroundColor: grey[100],
-          fontFamily: "Roboto, Arial, sans-serif",
+          fontFamily: "Montserrat, Arial, sans-serif",
         },
         ".navmenu": {
           textDecoration: "none",
@@ -114,13 +114,7 @@ const theme = createTheme({
           width: "100%",
         },
         ".footer": {
-          padding: "16px 32px",
           marginTop: "auto",
-          backgroundColor: grey[300],
-        },
-        ".footer-links": {
-          display: "flex",
-          justifyContent: "center",
         },
       },
     },

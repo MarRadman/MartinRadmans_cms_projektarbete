@@ -1,5 +1,5 @@
 import { getPageContent } from "./components/getPageContent";
-import { Box, Typography, CardMedia } from "@mui/material";
+import { Box, Typography, CardMedia, Button, Container } from "@mui/material";
 import { HomePageData } from "@/app/types";
 
 const HomePage = async () => {
@@ -10,7 +10,6 @@ const HomePage = async () => {
   }
 
   const { title, content, image } = pageData;
-
   const imageUrl = Array.isArray(image) ? image[0] : image;
 
   return (
@@ -31,6 +30,7 @@ const HomePage = async () => {
           textAlign: "center",
           mb: 3,
           fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
+          animation: "fadeIn 2s",
         }}>
         {title}
       </Typography>
@@ -44,15 +44,23 @@ const HomePage = async () => {
           mb: 3,
           boxShadow: 3,
           borderRadius: 2,
+          animation: "zoomIn 2s",
         }}
       />
       <Typography
         variant="body1"
         color="textSecondary"
         align="center"
-        sx={{ maxWidth: 800 }}>
+        sx={{ maxWidth: 800, mb: 3 }}>
         {content}
       </Typography>
+      <Button
+        variant="contained"
+        color="secondary"
+        sx={{ animation: "fadeInUp 2s" }}
+        href="/about">
+        Learn More About Me
+      </Button>
     </Box>
   );
 };

@@ -44,7 +44,7 @@ const Header = () => {
       <Box className="navmenu" sx={{ flexGrow: 1 }}>
         <AppBar
           position="static"
-          sx={{ backgroundColor: theme.palette.primary.main }}>
+          sx={{ background: "linear-gradient(to right, #ece9e6, #ffffff)" }}>
           <Toolbar>
             <Typography
               variant="h1"

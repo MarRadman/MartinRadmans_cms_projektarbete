@@ -26,25 +26,24 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <Box className={styles.container}>
       <div className={styles.stack}>
+        <Typography
+          variant="h2"
+          component="h2"
+          gutterBottom
+          sx={{
+            fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
+            textAlign: "center",
+            mb: 3,
+          }}>
+          {projectData.title}
+        </Typography>
         <Paper>
           <Typography
-            variant="h2"
-            component="h2"
-            gutterBottom
+            variant="body2"
             sx={{
-              fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
-              textAlign: "center",
-              mb: 3,
-            }}>
-            {projectData.title}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+              fontSize: { xs: "1rem", sm: "1rem", md: "1.25rem" },
               maxWidth: "1000px",
               textAlign: "center",
-              marginBottom: { xs: "1rem", sm: "1.5rem", md: "2rem" },
             }}>
             {projectData.content}
           </Typography>

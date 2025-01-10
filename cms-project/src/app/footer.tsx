@@ -24,9 +24,12 @@ const Footer = () => {
   return (
     <Box component="footer" className="footer">
       <Typography
+        sx={{
+          background: "linear-gradient(to right, #ece9e6, #ffffff)",
+        }}
         variant="subtitle1"
         align="center"
-        color="text.secondary"
+        color="secondary"
         component="p">
         © {year} {footerTitle}. All rights reserved.
       </Typography>
