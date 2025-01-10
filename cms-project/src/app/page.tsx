@@ -54,13 +54,6 @@ const HomePage = async () => {
         sx={{ maxWidth: 800, mb: 3 }}>
         {content}
       </Typography>
-      <Button
-        variant="contained"
-        color="secondary"
-        sx={{ animation: "fadeInUp 2s" }}
-        href="/about">
-        Learn More About Me
-      </Button>
     </Box>
   );
 };
