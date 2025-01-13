@@ -21,6 +21,10 @@ interface ProjectPageProps {
 }
 
 const ProjectPage = async ({ params }: ProjectPageProps) => {
+  if (!params || !params.slug) {
+    return <Typography variant="h1">Invalid project parameters</Typography>;
+  }
+
   const { slug } = params;
   const projectData: ProjectData | null = (await getPageContent(
     "project",
