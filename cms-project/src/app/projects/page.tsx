@@ -2,7 +2,7 @@
 
 import LoadingData from "@/app/components/getLoading";
 import { getPageContent } from "../components/getPageContent";
-import { ProjectsPageData } from "@/app/types";
+import { ProjectsPageData, ProjectData } from "@/app/types";
 import Link from "next/link";
 import {
   Box,
