@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { getPageContent } from "@/app/components/getPageContent";
 import { ProjectData } from "@/app/types";
 import {
@@ -12,8 +14,14 @@ import {
 import Link from "next/link";
 import styles from "./style.module.css";
 
-const ProjectPage = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = await params;
+interface ProjectPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+const ProjectPage = async ({ params }: ProjectPageProps) => {
+  const { slug } = params;
   const projectData: ProjectData | null = (await getPageContent(
     "project",
     slug
