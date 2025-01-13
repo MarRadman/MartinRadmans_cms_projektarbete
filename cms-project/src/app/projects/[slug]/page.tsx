@@ -14,18 +14,8 @@ import {
 import Link from "next/link";
 import styles from "./style.module.css";
 
-interface ProjectPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-const ProjectPage = async ({ params }: ProjectPageProps) => {
-  if (!params || !params.slug) {
-    return <Typography variant="h1">Invalid project parameters</Typography>;
-  }
-
-  const { slug } = params;
+const ProjectPage = async ({ params }: { params: { slug: string } }) => {
+  const { slug } = await params;
   const projectData: ProjectData | null = (await getPageContent(
     "project",
     slug
