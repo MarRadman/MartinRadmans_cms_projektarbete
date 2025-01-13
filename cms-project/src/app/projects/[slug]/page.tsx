@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 import styles from "./style.module.css";
 
-interface ProjectPageProps {
+interface ProjectPageProps extends ProjectData {
   params: {
     slug: string;
   };
