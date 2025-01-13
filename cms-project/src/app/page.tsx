@@ -1,5 +1,5 @@
 import { getPageContent } from "./components/getPageContent";
-import { Box, Typography, CardMedia, Button, Container } from "@mui/material";
+import { Box, Typography, CardMedia } from "@mui/material";
 import { HomePageData } from "@/app/types";
 
 const HomePage = async () => {

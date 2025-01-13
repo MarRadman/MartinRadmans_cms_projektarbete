@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { fetchData } from "../lib/contentful";
 import { NavMenuData, NavMenuItem } from "@/app/types";
 

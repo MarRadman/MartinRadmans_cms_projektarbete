@@ -7,8 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
-import InputBase from "@mui/material/InputBase";
-import { Paper, useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { useState, useEffect } from "react";
 import getNavMenuItems from "./components/getNavMenu";
@@ -20,7 +19,6 @@ const Header = () => {
   );
   const [navTitle, setNavTitle] = useState<string>("Simple is Key");
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const fetchMenuItems = async () => {
@@ -59,22 +57,6 @@ const Header = () => {
               }}>
               {navTitle}
             </Typography>
-            {/* {!isMobile && ( // Searchbar implemented. None function right now.
-              <Paper
-                component="form"
-                sx={{
-                  p: "2px 4px",
-                  display: "flex",
-                  alignItems: "center",
-                  width: "400",
-                }}>
-                <InputBase
-                  sx={{ ml: 1, flex: 1 }}
-                  placeholder="Search"
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Paper>
-            )} */}
             <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
             <IconButton
               size="large"
