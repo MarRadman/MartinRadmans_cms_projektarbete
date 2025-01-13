@@ -7,7 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { useState, useEffect } from "react";
 import getNavMenuItems from "./components/getNavMenu";
