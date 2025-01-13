@@ -13,7 +13,7 @@ import {
 
 export const getPageContent = async (
   contentType: string,
-  slug?: string,
+  slug: string,
   category?: string
 ): Promise<
   | HomePageData

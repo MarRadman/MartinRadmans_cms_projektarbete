@@ -8,7 +8,7 @@ export const client = createClient({
 
 export const fetchData = async (
   contentType: string,
-  slug?: string,
+  slug: string,
   category?: string
 ) => {
   try {
