@@ -15,17 +15,16 @@ import Link from "next/link";
 import styles from "./style.module.css";
 
 interface ProjectPageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 const ProjectPage = async ({ params }: ProjectPageProps) => {
-  if (!params || !params.slug) {
+  const { slug } = await params;
+
+  if (!slug) {
     return <Typography variant="h1">Invalid project parameters</Typography>;
   }
 
-  const { slug } = params;
   const projectData: ProjectData | null = (await getPageContent(
     "project",
     slug
