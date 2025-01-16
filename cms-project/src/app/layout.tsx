@@ -19,8 +19,10 @@ export default function RootLayout({
         <meta name="description" content="Headless CMS Project" />
         <meta name="keywords" content="CMS, NEXT.TS, Contentful" />
         <meta name="author" content="Martin" />
-        <meta property="description" content="CMS Project" />
-        <link rel="canonical" href="https://github.com/MarRadman" />
+        <link
+          rel="canonical"
+          href="https://github.com/MarRadman/MartinRadmans_cms_projektarbete"
+        />
         <title>Simple is Key</title>
       </head>
       <body>
